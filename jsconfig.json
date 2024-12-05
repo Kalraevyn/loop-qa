@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "NodeNext",
+        "checkJs": true,
+        "moduleResolution": "NodeNext",
+        "baseUrl": "./src"
+    },
+    "exclude": [
+        "node_modules",
+        "playwright-report"
+    ],
+    "include": [
+        "src/**/*"
+    ]
+}
