@@ -1,6 +1,6 @@
 import { LoginPage } from "./login-page.js";
 import { test, expect } from "@playwright/test";
-import { ColumnName, ProjectsPage } from "./projects-page.js";
+import { ColumnName, Project, ProjectsPage } from "./projects-page.js";
 
 let app: ProjectsPage;
 const testCases = {
@@ -48,8 +48,7 @@ test.describe('Web Application', () => {
         const loginPage = new LoginPage(page);
         await loginPage.goToLogin();
         app = await loginPage.signIn(process.env.LOGINNAME ?? '', process.env.PASSWORD ?? '');
-        await app.webApplicationElement.click();
-        await app.init(); // Ensure columns are initialized before running tests
+        await app.goToProject(Project.WebApplication);
     });
 
     Object.keys(testCases.webApplication).forEach(columnName => {
@@ -77,8 +76,8 @@ test.describe('Mobile Application', () => {
         const loginPage = new LoginPage(page);
         await loginPage.goToLogin();
         app = await loginPage.signIn(process.env.LOGINNAME ?? '', process.env.PASSWORD ?? '');
-        await app.mobileApplicationElement.click();
-        await app.init();
+        await app.goToProject(Project.MobileApplication);
+        await app.updateColumns();
     });
 
     Object.keys(testCases.mobileApplication).forEach(columnName => {
